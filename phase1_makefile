@@ -1,0 +1,35 @@
+CC = arm-none-eabi-gcc
+LD = arm-none-eabi-ld
+IN = include/
+SRC = source/
+CFLAGS = -mcpu=arm7tdmi -c -I "/usr/include/uarm"
+OBJECTS		= $(SRC)p1test.o $(SRC)pcb.o $(SRC)asl.o
+P1_HEADERS	= $(IN)pcb.h $(IN)asl.h $(IN)const.h $(IN)clist.h $(IN)types.h
+UARM_LIBS	= /usr/include/uarm/ldscripts/elf32ltsarm.h.uarmcore.x -o jaeos16 /usr/include/uarm/crtso.o /usr/include/uarm/libuarm.o
+UARM_HEADERS	= /usr/include/uarm/libuarm.h /usr/include/uarm/uARMconst.h /usr/include/uarm/uARMtypes.h /usr/include/uarm/arch.h
+
+all: jaeos16
+
+phase1 : $(OBJECTS)
+	$(LD) -T $(UARM_LIBS)
+	elf2uarm -k jaeos16
+
+jaeos16 : $(OBJECTS)
+	$(LD) -T $(UARM_LIBS) $(OBJECTS)
+	elf2uarm -k jaeos16
+
+pcb.o : $(SRC)pcb.c $(IN)pcb.h $(IN)const.h $(IN)clist.h $(IN)types.h
+	$(CC) $(CFLAGS) -o $(SRC)pcb.o $(SRC)pcb.c
+
+asl.o : $(SRC)asl.c $(IN)asl.h $(IN)pcb.h $(IN)clist.h $(IN)const.h
+	$(CC) $(CFLAGS) -o $(SRC)asl.o $(SRC)asl.c
+
+p1test.o : $(SRC)p1test.c $(UARM_HEADERS) $(P1_HEADERS)
+	$(CC) $(CFLAGS) -o $(SRC)p1test.o $(SRC)p1test.c
+
+clean:
+	rm -rf *o jaeos16
+
+cleanall:
+	rm -rf *o jaeos16 jaeos16.core.uarm jaeos16.stab.uarm
+

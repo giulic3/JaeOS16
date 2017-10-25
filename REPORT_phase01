@@ -1,0 +1,61 @@
+
+JAEOS 2016 - phase0 and phase1
+
+Laura Bugo 			(laura.bugo@studio.unibo.it)
+Giulia Cantini	 	(giulia.cantini2@studio.unibo.it)
+Antonella Eustatio	(antonella.eustazio@studio.unibo.it)
+Silvia Severini		(silvia.severini3@studio.unibo.it)
+
+Phase1 documentation : http://www.cs.unibo.it/~renzo/so/jaeos16/phase1.pdf
+
+clist.h
+
+#define clist_delete(elem, clistp, member)
+This macro has as return value of 0 if elem is found and deleted, else 1.
+This macro analyzes the following cases (in case the list is not empty)
+	1. elem is the head of the list
+	2. otherwise it looks for the element inside the list
+		2.1 elem is the tail
+		2.2 elem is another element inside the list
+		2.3 elem is not found
+
+#define clist_foreach(scan, clistp, member, tmp)
+The loop ends when the pointer scan, that browses the list starting from the head, becomes the head again.
+
+#define clist_foreach_all(scan, clistp, member, tmp)
+Return true also when the list scanned by clist_foreach is empty (to avoid possible segmentation fault errors while executing p0test)
+
+#define clist_head(elem, clistx, member)
+#define clist_tail(elem, clistx, member)
+Precondition: the list whose head is clistx must not be empty
+
+pcb.c
+
+struct pcb_t *allocPcb()
+This function inizializes all the fields of the pcb_t struct defined in types.h, and all the fields of the state_t struct defined in uARMtypes.h.
+
+
+asl.c
+
+The following functions have been added in order to simplify the reading of the code:
+\
+	- HIDDEN void freeSemd(struct semd_t *s)	
+	Insert in the semdFree list the semaphore pointed by s. Note that the semaphore is not removed from the ASL list
+
+	- HIDDEN int emptyProcQ(struct semd_t *s)	
+	Return true if the process queue of the semaphore s is empty, otherwise return false.
+
+	- HIDDEN struct semd_t *findSemd(int *semAdd, struct clist semh) 
+	Search the semaphore whose descriptor is s into the list of semaphores where the head is semh. If the semaphore is found, 		the function returns the descriptor, otherwise it returns NULL.
+\
+
+int insertBlocked(int *semAdd, struct pcb_t *p)
+
+This function analyzes the following cases:
+	1. The searched semaphore is in the ASL list
+	2. The searched semaphore is not in the ASL list, so it is necessary to allocate a new descriptor
+		2.1 It's impossible to allocate the descriptor because the semdFree list is empty
+		2.2 It's possible to allocate the descriptor which is used to decide the position of the semaphore in the ASL list 
+
+
+		
