@@ -1,3 +1,12 @@
+# JaeOS16
+
+JaeOS was developed as an educational operating system and intended to be run using the [MicroARM Emulator](http://mellotanica.github.io/uARM/).
+
+
+### Testing
+
+The project is divided into 3 phases (p0, p1 and p2), each one must be tested separately.
+
 How to execute and test p0test.c :
 
 	- comment the following line of the file clist.h : 
@@ -54,10 +63,5 @@ How to execute and test p2test.c :
 	- open terminal 0 on "Terminals".
 
 	- click "Play" to boot the OS.
-
-Links:
-
-MicroARM Emulator: http://mellotanica.github.io/uARM/
-
 
 
