@@ -1,7 +1,8 @@
 # JaeOS16
 
-JaeOS was developed as an educational operating system and intended to be run using the [MicroARM Emulator](http://mellotanica.github.io/uARM/).
+JaeOS is an educational operating system intended to be run using the [MicroARM Emulator](http://mellotanica.github.io/uARM/).
 
+It was developed for the course of Operating Systems at the University of Bologna (a.y. 2015/2016)
 
 ### Testing
 
