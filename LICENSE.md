@@ -3,7 +3,9 @@ Authors
 Copyright (C) 2016
 
 Laura Bugo  (laura.bugo@studio.unibo.it)
+
 [Giulia Cantini](https://github.com/giulic3)  (giulia.cantini2@studio.unibo.it)
+
 [Silvia Severini](https://github.com/silviaseverini)  (silvia.severini3@studio.unibo.it)
 
 Licensing
